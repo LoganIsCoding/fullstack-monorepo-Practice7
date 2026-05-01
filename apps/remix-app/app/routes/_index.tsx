@@ -26,6 +26,8 @@ export const loader = async ({ request: _request }: LoaderFunctionArgs) => {
   const users = await Service.userRepository.getUsers();
   const hello = await (await fetch("http://localhost:4000/hello")).text();
 
+  console.log("Loader users:", JSON.stringify(users));
+
   const salesPersons = getSalesPersonDirectory();
   return json({
     hello,
@@ -33,6 +35,14 @@ export const loader = async ({ request: _request }: LoaderFunctionArgs) => {
     serverValue: helloWorld("Remix Turborepo"),
     salesPersons,
   });
+};
+
+export const action = async ({ request }: LoaderFunctionArgs) => {
+  const formData = await request.formData();
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  console.log(`Login attempt: email=${email} password=${password}`);
+  return json({ ok: true });
 };
 
 export default function Index() {

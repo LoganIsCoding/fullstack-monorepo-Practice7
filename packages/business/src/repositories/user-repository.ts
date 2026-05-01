@@ -8,7 +8,13 @@ export class PrismaUserRepository implements UserRepository {
     this.prisma = prisma;
   }
   async getUsers(): Promise<User[]> {
-    return this.prisma.user.findMany();
+    const ids = await this.prisma.user.findMany({ select: { id: true } });
+    const users: User[] = [];
+    for (const { id } of ids) {
+      const user = await this.prisma.user.findUnique({ where: { id } });
+      if (user) users.push(user);
+    }
+    return users;
   }
 
   async getUsersCount(): Promise<number> {

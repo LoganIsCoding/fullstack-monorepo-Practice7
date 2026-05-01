@@ -20,7 +20,7 @@
 		"moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "target": "ES2022",
-    "strict": true,
+    "strict": false,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,

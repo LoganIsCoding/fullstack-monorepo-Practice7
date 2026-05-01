@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -13,5 +13,11 @@ export class AppController {
   @Get('hello')
   getHelloWorld(): string {
     return 'Hello from NestJS!';
+  }
+
+  @Get('user')
+  async getUser(@Query('id') id: string): Promise<{ id: string; name: string }> {
+    const user = await this.appService.findUser(id);
+    return { id: user.id, name: user.name };
   }
 }

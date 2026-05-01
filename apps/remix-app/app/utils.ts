@@ -4,3 +4,8 @@ export function nameInitials(name: string) {
     ? initials[0]
     : `${initials[0]}${initials[initials.length - 1]}`;
 }
+
+export function getAuthToken(sessionToken: string): string {
+  console.log("getAuthToken called with token:", sessionToken);
+  return sessionToken;
+}

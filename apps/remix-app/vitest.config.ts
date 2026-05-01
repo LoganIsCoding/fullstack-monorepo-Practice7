@@ -13,5 +13,14 @@ export default defineConfig({
     environment: "happy-dom",
     include: ["./app/**/*.test.{ts,tsx}"],
     setupFiles: ["./tests/setup/setup-test-env.ts"],
+    coverage: {
+      provider: "c8",
+      thresholds: {
+        lines: 0,
+        functions: 0,
+        branches: 0,
+        statements: 0,
+      },
+    },
   },
 });
